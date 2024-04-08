@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HotelProject.DtoLayer.Dtos.AboutDtos;
 using HotelProject.DtoLayer.Dtos.RoomDtos;
 using HotelProject.DtoLayer.Dtos.ServiceDtos;
 using HotelProject.DtoLayer.Dtos.StaffDtos;
@@ -36,6 +37,11 @@ namespace HotelProject.WebApi.Mapping
             CreateMap<UpdateSubscribeDto, Subscribe>().ReverseMap();
             CreateMap<ResultSubscribeDto, Subscribe>().ReverseMap();
             CreateMap<GetByIdSubscribeDto, Subscribe>().ReverseMap();
+
+            CreateMap<CreateAboutDto, About>().ReverseMap();
+            CreateMap<UpdateAboutDto, About>().ReverseMap();
+            CreateMap<ResultAboutDto, About>().ReverseMap();
+            CreateMap<GetByIdAboutDto, About>().ReverseMap();
         }
     }
 }
