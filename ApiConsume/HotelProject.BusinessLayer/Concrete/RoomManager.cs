@@ -28,6 +28,11 @@ namespace HotelProject.BusinessLayer.Concrete
             return _roomDal.GetById(id);
         }
 
+        public List<Room> TGetFirstThreeRooms()
+        {
+            return _roomDal.GetFirstThreeRooms();
+        }
+
         public List<Room> TGetList()
         {
             return _roomDal.GetList();

@@ -11,5 +11,14 @@ namespace HotelProject.DataAccessLayer.EntityFramework
         public EfRoomDal(Context context) : base(context)
         {
         }
+
+        public List<Room> GetFirstThreeRooms()
+        {
+            using var context = new Context();
+
+            var values = context.Rooms.OrderBy(x => x.RoomID).Take(3).ToList();
+
+            return values;
+        }
     }
 }
