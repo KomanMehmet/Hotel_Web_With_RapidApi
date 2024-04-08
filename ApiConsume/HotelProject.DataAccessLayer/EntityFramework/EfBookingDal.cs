@@ -10,5 +10,16 @@ namespace HotelProject.DataAccessLayer.EntityFramework
         public EfBookingDal(Context context) : base(context)
         {
         }
+
+        public void ChangeBookingStatusApproved(int id)
+        {
+            using var context = new Context();
+
+            var value = context.Bookings.Find(id);
+
+            value.Status = "Onaylandı";
+
+            context.SaveChanges();
+        }
     }
 }
