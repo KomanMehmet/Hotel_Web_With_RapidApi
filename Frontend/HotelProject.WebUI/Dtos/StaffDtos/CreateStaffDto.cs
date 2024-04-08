@@ -1,9 +1,7 @@
-﻿namespace HotelProject.EntityLayer.Concrete
+﻿namespace HotelProject.WebUI.Dtos.StaffDtos
 {
-    public class Staff
+    public class CreateStaffDto
     {
-        public int StaffID { get; set; }
-
         public string StaffName { get; set; }
 
         public string StaffTitle { get; set; }
