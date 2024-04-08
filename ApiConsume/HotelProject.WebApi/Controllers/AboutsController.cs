@@ -22,7 +22,7 @@ namespace HotelProject.WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetRoomList()
+        public IActionResult GetAboutList()
         {
             var values = _aboutService.TGetList();
 
