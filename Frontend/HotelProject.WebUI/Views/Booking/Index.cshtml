@@ -17,8 +17,8 @@
 
         @await Component.InvokeAsync("_BookingCoverComponentPartial")
 
-        @await Component.InvokeAsync("_BookingComponentPartial")
-
+@*         @await Component.InvokeAsync("_BookingComponentPartial")
+ *@
         @await Html.PartialAsync("AddBooking.cshtml");
 
         @await Html.PartialAsync("/Views/Default/SubscribeComponentPartial.cshtml")
