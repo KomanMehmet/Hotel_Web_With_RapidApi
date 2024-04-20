@@ -3,10 +3,12 @@ using HotelProject.BusinessLayer.Concrete;
 using HotelProject.DataAccessLayer.Abstract;
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.EntityFramework;
+using HotelProject.WebApi.Hubs;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 builder.Services.AddCors(opt =>
 {
@@ -18,6 +20,8 @@ builder.Services.AddCors(opt =>
         .AllowCredentials();
     });
 });
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<Context>();
 
@@ -71,5 +75,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<SignalRHub>("/signalrhub");
 
 app.Run();

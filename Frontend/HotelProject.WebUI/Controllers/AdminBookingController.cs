@@ -1,7 +1,6 @@
 ﻿using HotelProject.WebUI.Dtos.BookingDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace HotelProject.WebUI.Controllers
 {

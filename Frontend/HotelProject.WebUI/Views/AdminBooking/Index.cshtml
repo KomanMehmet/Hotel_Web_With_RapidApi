@@ -6,52 +6,79 @@
     int count = 0;
 }
 
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
 <div class="container-fluid">
+
+    <script type="text/javascript">
+
+        $(document).ready(() => {
+            var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5096/signalrhub").build();
+            $("#constatus").text(connection.state);
+            connection.start().then(() => {
+                $("#constatus").text(connection.state);
+                setInterval(() => {
+                    connection.invoke("SendBookingList");/* SignalIR veri çekme */
+                }, 1000);
+            }).catch((err) => {
+                console.log(err)
+            });
+
+            // SignalIR veri çekme
+            connection.on("ReceiveBookingList", (bookingList) => {
+                // $("#bookingList").text(bookingList);
+                console.log(bookingList);
+                let tablehtml = `<table class=table mt-3><thead>
+                                                                         <tr>
+                                                                         <th scope="col">#</th>
+                                                                         <th scope="col">Ad Soyad</th>
+                                                                         <th scope="col">Giriş Tarihi</th>
+                                                                         <th scope="col">Çıkış Tarihi</th>
+                                                                         <th scope="col">Durum</th>
+                                                                         <th scope="col">Onayla</th>
+                                                                         <th scope="col">İptal Et</th>
+                                                                         <th scope="col">Beklet</th>
+                                                                         <th scope="col">Güncelle</th>
+                                                                         <th scope="col">Detaylar</th>
+                                                                         </tr>
+                                                                         </thead>
+                                                                         <tbody>`
+                $.each(bookingList, (index, item) => {
+                    tablehtml += `<tr>
+                                                                        <th>${index + 1}</th>
+                                                                        <td>${item.name}</td>
+                                                                        <td>${item.checkIn}</td>
+                                                                        <td>${item.checkOut}</td>
+                                                                        <td>${item.status}</td>
+                                                                        <td><a href="/AdminBooking/ApprovedBooking/${item.bookingID}" class="btn btn-outline-danger">Sil</a></td>
+                                                                        <td><a href="/Booking/UpdateBooking//${item.bookingID}" class="btn btn-outline-success">Güncelle</a></td>
+                                                                        <td><a href="" class="btn btn-outline-info">Beklet</a></td>
+                                                                        <td><a href="" class="btn btn-outline-dark">Güncelle</a></td>
+                                                                        <td><a href="" class="btn btn-outline-warning">Detaylar</a></td>
+                                                                        </tr>`
+                });
+                tablehtml += "</tbody></table>";
+                $("#bookingList").html(tablehtml);
+            });
+        });
+
+
+    </script>
+
     <div class="row">
-            <h4 class="card-title">Rezervasyon Tablosu</h4>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered zero-configuration">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Ad Soyad</th>
-                            <th>Giriş Tarihi</th>
-                            <th>Çıkış Tarihi</th>
-                            <th>Durum</th>
-                            <th>Onayla</th>
-                            <th>İptal Et</th>
-                            <th>Beklet</th>
-                            <th>Güncelle</th>
-                            <th>Detaylar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model)
-                        {
-                            count++;
-                            <tr>
-                                <td>@count</td>
-                                <td>@item.Name</td>
-                                <td>@(((DateTime)item.CheckIn).ToString("dd-MMM-yyyy"))</td>
-                                <td>@(((DateTime)item.CheckOut).ToString("dd-MMM-yyyy"))</td>
-                                <td>@item.Status</td>
-                            <td><a href="/AdminBooking/ApprovedBooking/@item.BookingID" class=" btn mb-1 btn-rounded btn-outline-success">Onayla</a></td>
-                                <td><a href="/Booking/UpdateBooking/@item.BookingID" class=" btn mb-1 btn-rounded btn-outline-danger">İptal Et</a></td>
-                                <td><a href="#" class=" btn mb-1 btn-rounded btn-outline-warning">Beklet</a></td>
-                                <td><a href="#" class=" btn mb-1 btn-rounded btn-outline-info">Güncelle</a></td>
-                                <td><a href="#" class=" btn mb-1 btn-rounded btn-outline-dark">Detaylar</a></td>
-                            </tr>
-                        }
-
-                    </tbody>
-
-                </table>
-
-                <a href="/Booking/CreateBooking/" class="btn mb-1 btn-rounded btn-outline-primary">Yeni Rezervasyon Ekle</a>
+        <h4 class="card-title">Rezervasyon Tablosu</h4>
+        <div class="table-responsive">
+            <div id="bookingList">
             </div>
-        </div>
 
+            <a href="/Booking/CreateBooking/" class="btn mb-1 btn-rounded btn-outline-primary">Yeni Rezervasyon Ekle</a>
+        </div>
     </div>
+
+</div>
 
 
