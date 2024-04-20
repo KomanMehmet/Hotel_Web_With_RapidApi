@@ -1,0 +1,58 @@
+﻿@model CreateRoomDto
+
+@{
+    ViewData["Title"] = "CreateRoom";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Yeni Oda Ekle</h4>
+                    <div class="basic-form">
+                        <form method="post">
+                            <div class="form-group">
+                                <input type="text" asp-for="RoomNumber" class="form-control input-rounded" placeholder="Oda Numarası">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="RoomCoverImage" class="form-control input-rounded" placeholder="Oda Görsel URL">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="Price" class="form-control input-rounded" placeholder="Oda Fiyatı">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="RoomTitle" class="form-control input-rounded" placeholder="Oda Başlığı">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="BedCount" class="form-control input-rounded" placeholder="Yatak Sayısı">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="BethCount" class="form-control input-rounded" placeholder="Banyo Sayısı">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="WiFi" class="form-control input-rounded" placeholder="Wi-Fi">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="RoomDescription" class="form-control input-rounded" placeholder="Oda Açıklaması">
+                            </div>
+
+                            <button type="submit" class="btn mb-1 btn-rounded btn-outline-primary">Yeni Oda Kaydet</button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
