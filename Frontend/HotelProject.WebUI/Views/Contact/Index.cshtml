@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+@* Contact İletişim Sayfası *@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadComponentPartial")
+
+<body>
+    <div class="container-xxl bg-white p-0">
+
+        @await Component.InvokeAsync("_SpinnerComponentPartial")
+
+        @await Component.InvokeAsync("_NavBarComponentPartial")
+
+        @await Component.InvokeAsync("_ContactCoverPartial")
+
+        @await Html.PartialAsync("/Views/Contact/SendMessage.cshtml")
+
+        @await Html.PartialAsync("/Views/Default/SubscribeComponentPartial.cshtml")
+
+        @await Component.InvokeAsync("_FooterComponentPartial")
+
+
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    @await Component.InvokeAsync("_ScriptComponentPartial")
+
+</body>
+
+</html>
