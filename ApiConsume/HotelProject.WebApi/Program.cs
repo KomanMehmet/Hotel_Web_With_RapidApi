@@ -52,6 +52,9 @@ builder.Services.AddScoped<IGuestDal, EfGuestDal>();
 builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IContactDal, EfContactDal>();
 
+builder.Services.AddScoped<ISendMessageService, SendMessageManager>();
+builder.Services.AddScoped<ISendMessageDal, EfSendMessageDal>();
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllersWithViews().AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

@@ -1,4 +1,4 @@
-﻿@model UpdateStaffViewModel
+﻿@model UpdateStaffDto
 
 @{
     ViewData["Title"] = "UpdateStaff";
@@ -20,6 +20,10 @@
 
                             <div class="form-group">
                                 <input type="text" asp-for="StaffTitle" class="form-control input-rounded" placeholder="Ünvan">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" asp-for="StaffImage" class="form-control input-rounded" placeholder="Fotoğraf">
                             </div>
 
                             <div class="form-group">

@@ -1,4 +1,5 @@
-﻿using HotelProject.WebUI.Models.Staff;
+﻿using HotelProject.WebUI.Dtos.StaffDtos;
+using HotelProject.WebUI.Models.Staff;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -82,7 +83,7 @@ namespace HotelProject.WebUI.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
 
-                var value = JsonConvert.DeserializeObject<UpdateStaffViewModel>(jsonData);
+                var value = JsonConvert.DeserializeObject<UpdateStaffDto>(jsonData);
 
                 return View(value);
             }
@@ -91,11 +92,11 @@ namespace HotelProject.WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateStaff(UpdateStaffViewModel updateStaffViewModel)
+        public async Task<IActionResult> UpdateStaff(UpdateStaffDto updateStaffDto)
         {
             var client = _httpClientFactory.CreateClient();
 
-            var jsonData = JsonConvert.SerializeObject(updateStaffViewModel);
+            var jsonData = JsonConvert.SerializeObject(updateStaffDto);
 
             StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
